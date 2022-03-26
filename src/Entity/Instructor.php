@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InstructorRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: InstructorRepository::class)]
@@ -17,12 +19,15 @@ class Instructor extends User
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\NotBlank(message: "Vous devez saisir un nom")]
     #[ORM\Column(type: 'string', length: 50)]
     private $firstName;
 
+    #[Assert\NotBlank(message: "Vous devez saisir un prénom")]
     #[ORM\Column(type: 'string', length: 50)]
     private $lastName;
 
+    #[Assert\NotBlank(message: "Vous devez saisir une descrption")]
     #[ORM\Column(type: 'text')]
     private $description;
 
@@ -37,10 +42,11 @@ class Instructor extends User
         $this->courses = new ArrayCollection();
     }
 
+    /*
     public function getId(): ?int
     {
         return $this->id;
-    }
+    }*/
 
     public function getFirstName(): ?string
     {

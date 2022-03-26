@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -26,11 +27,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank(message: "Vous devez saisir une adresse email")]
     private $email;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
+    #[Assert\NotBlank(message: "Vous devez saisir un mot de passe")]
     #[ORM\Column(type: 'string')]
     private $password;
 

@@ -1,3 +1,46 @@
-body {
-    background-color: lightgray;
+
+@font-face {
+    font-family: "ArsenalRegular";
+    src: url("./fonts/Arsenal-Regular.ttf") format("truetype");
+    font-weight: bold;
+    }
+
+    @font-face {
+        font-family: "Nunito";
+        src: url("./fonts/NunitoSans-Regular.ttf") format("truetype");
+        font-weight: bold;
+        };
+ *{
+    font-family: 'Nunito';  
 }
+
+body {
+    background-color: #FFFFFF;
+
+}
+
+h1, span, label, form{
+    font-family: 'ArsenalRegular';
+    color:'#364958';
+}
+
+.rtf{
+    z-index: 100 !important;
+}
+.rtf--mb{
+   
+    background-color: #364958 !important;
+}
+.form-control, .input-group-text{
+    border-radius: 10px;
+    border-color: #364958;
+}
+.input-group-text{
+    background-color: #364958;
+    color: #FFFFFF;
+}
+.input-form{
+    outline: none;
+}
+
+
