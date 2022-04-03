@@ -5,3 +5,8 @@ api_platform:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
+    formats:
+        json: ['application/json']
+        jsonld: ['application/ld+json']
+        html: ['text/html']
+        multipart: ['multipart/form-data']

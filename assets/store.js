@@ -2,7 +2,7 @@ import { configureStore, createSlice, applyMiddleware, combineReducers } from "@
 
 const isAuthenticatedSlice = createSlice({
     name: "authenticated",
-    initialState: { status: false, roles: [""] },
+    initialState: { status: false, roles: [""], avatar: "" },
     reducers: {
         setAuthenticated(state, action) {
             return state, action.payload

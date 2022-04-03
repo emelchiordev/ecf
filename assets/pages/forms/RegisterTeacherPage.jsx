@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
+import InstructorApi from '../../services/InstructorApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faCircleInfo, faAt, faKey } from '@fortawesome/free-solid-svg-icons'
 import Button from '../../components/Button'
-import InstructorApi from '../../services/InstructorApi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AddTeacherPage = () => {
-    const notify = () => toast("Le formateur a bien été créé");
+const RegisterTeacherPage = () => {
 
+    const [sending, setSending] = useState(false)
 
     const [instructor, setInstructor] = useState({
         accountValidate: true,
@@ -19,8 +19,6 @@ const AddTeacherPage = () => {
         description: "",
         email: ""
     })
-
-    const [sending, setSending] = useState(false)
 
     const [errorValidation, setErrorValidation] = useState({
         firstName: "",
@@ -34,8 +32,6 @@ const AddTeacherPage = () => {
         const { name, value } = currentTarget
         setInstructor({ ...instructor, [name]: value })
     }
-
-
 
     const handleSubmit = () => {
         setSending(true)
@@ -60,12 +56,9 @@ const AddTeacherPage = () => {
         })
     }
 
-
     return (
         <div className='container d-flex flex-column align-items-center '>
-
-
-            <h1>Ajouter un formateur</h1>
+            <h1>Vous souhaitez devenir formateur ?</h1>
             <form>
                 <div className='justify-content-between'>
                     <div className="row">
@@ -105,7 +98,7 @@ const AddTeacherPage = () => {
                     <p>Vous avez déjà un compte ? </p>
                 </div>
             </form >
-            <Button text="AJOUTER" simple sending={sending} onclick={handleSubmit}></Button>
+            <Button text="S'INSCRIRE" simple sending={sending} onclick={handleSubmit}></Button>
             <ToastContainer
                 position="bottom-center"
                 autoClose={5000}
@@ -117,8 +110,8 @@ const AddTeacherPage = () => {
                 draggable
                 pauseOnHover
             />
-        </div >
+        </div>
     )
 }
 
-export default AddTeacherPage
+export default RegisterTeacherPage

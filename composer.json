@@ -32,7 +32,8 @@
         "symfony/twig-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
         "symfony/webpack-encore-bundle": "^1.14",
-        "symfony/yaml": "6.0.*"
+        "symfony/yaml": "6.0.*",
+        "vich/uploader-bundle": "^1.19"
     },
     "config": {
         "allow-plugins": {
@@ -87,6 +88,7 @@
     },
     "require-dev": {
         "symfony/stopwatch": "6.0.*",
+        "symfony/var-dumper": "6.0.*",
         "symfony/web-profiler-bundle": "6.0.*"
     }
 }

@@ -2,16 +2,21 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InstructorRepository;
+use App\Controller\CreateMediaObjectAction;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-#[ApiResource]
+#[ApiResource()]
+
 #[ORM\Entity(repositoryClass: InstructorRepository::class)]
+
 class Instructor extends User
 {
     #[ORM\Id]
@@ -36,6 +41,11 @@ class Instructor extends User
 
     #[ORM\OneToMany(mappedBy: 'instructor', targetEntity: Course::class, orphanRemoval: true)]
     private $courses;
+
+    #[ORM\ManyToOne(targetEntity: MediaObject::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'http://schema.org/image')]
+    public ?MediaObject $avatar = null;
 
     public function __construct()
     {
@@ -122,6 +132,18 @@ class Instructor extends User
                 $course->setInstructor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?MediaObject
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

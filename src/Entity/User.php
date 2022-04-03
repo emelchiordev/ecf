@@ -8,6 +8,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ApiResource]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -19,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     "administrator" => Administrator::class,
 ])]
 #[ORM\Table(name: '`user`')]
+#[UniqueEntity("email", message: "Un compte existe déjà avec cette adresse email")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -28,6 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir une adresse email")]
+    #[Assert\Email(message: "Votre adresse email n'est pas valide")]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -37,6 +40,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +84,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return array_unique($roles);
     }
+
+
 
     public function setRoles(array $roles): self
     {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import logo from '../styles/img/ecoit.jpg'
 import Button from './Button'
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Authenticated from '../services/Authenticated';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGears } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +22,9 @@ const NavBar = ({ isAuthenticatedStatus }) => {
         navigate("/connexion");
     }
 
+    const handleProfil = () => {
+        navigate("/mon-profil");
+    }
     const handleDisconnect = () => {
         Authenticated.expirateToken();
         navigate("../", { replace: true });
@@ -47,25 +50,44 @@ const NavBar = ({ isAuthenticatedStatus }) => {
 
                         <div className="collapse navbar-collapse " id="navbarToggleExternalContent">
                             {!isAuthenticatedStatus.status && <>
-                                <span>DEVENIR INSTRUCTEUR ?</span>
+                                <NavLink to='/inscription-formateur'>DEVENIR INSTRUCTEUR ?</NavLink>
                                 <Button alternative text="S'INSCRIRE" />
                             </>
                             }
-                            {isAuthenticatedStatus.status === true ? (isAuthenticatedStatus.roles.includes("administrator") &&
+                            {isAuthenticatedStatus.status === true ? ((isAuthenticatedStatus.roles.includes("administrator") || isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS")) &&
                                 <>
-                                    <ButtonNav className='me-4' onClick={() => { navigate('/administration/formateurs') }}><FontAwesomeIcon icon={faGears} /> LES FORMATEURS</ButtonNav>
-                                    <div className="dropdown me-2">
+                                    {isAuthenticatedStatus.roles.includes("administrator") &&
+                                        <ButtonNav className='me-4' onClick={() => { navigate('/administration/formateurs') }}><FontAwesomeIcon icon={faGears} /> LES FORMATEURS</ButtonNav>
 
-                                        <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <Avatar value="ADM" size="50" round={true} color="#364958" />
-                                        </a>
+                                    }
+                                    {isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS") &&
+                                        <ButtonNav className='me-4' onClick={() => { navigate('/administration/formateurs') }}><FontAwesomeIcon icon={faGears} /> GERER MES FORMATIONS</ButtonNav>
+
+                                    }
+                                    <div className="dropdown me-2">
+                                        {isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS") &&
+                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <Avatar src={"http://localhost:8000/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
+                                            </a>
+                                        }
+                                        {isAuthenticatedStatus.roles.includes("administrator") &&
+                                            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <Avatar value="ADM" size="50" round={true} color="#364958" />
+                                            </a>
+                                        }
+
+
 
                                         <ul className="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuLink">
+                                            {isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS") &&
+                                                <li><div style={{ "cursor": 'pointer' }} className="dropdown-item" onClick={handleProfil}>Mon Profil</div></li>
 
+                                            }
                                             <li><div style={{ "cursor": 'pointer' }} className="dropdown-item" onClick={handleDisconnect}>Se Déconnecter</div></li>
 
                                         </ul>
                                     </div>
+                                    {console.log(isAuthenticatedStatus)}
                                 </>
                             ) : <Button onclick={handleConnect} text='SE CONNECTER' />
                             }
@@ -104,6 +126,7 @@ const NavBar = ({ isAuthenticatedStatus }) => {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

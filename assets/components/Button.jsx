@@ -7,7 +7,7 @@ const Button = ({ text, alternative, offcanvas, onclick, deconnect, simple, send
 
 
     return (
-        <Wrapper alternative={alternative} simple sending data-bs-dismiss={offcanvas ? "offcanvas" : null} offcanvas={offcanvas} onClick={onclick} deconnect={deconnect} >{sending ?
+        <Wrapper alternative={alternative} simple={false} sending data-bs-dismiss={offcanvas ? "offcanvas" : null} offcanvas={offcanvas} onClick={onclick} deconnect={deconnect} >{sending ?
             <><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span ><span> CHARGEMENT</span></>
             : text}</Wrapper>
 
@@ -16,13 +16,13 @@ const Button = ({ text, alternative, offcanvas, onclick, deconnect, simple, send
 
 const Wrapper = styled.div`
 
-    background-color:${props => props.alternative ? "#FFFFFF" : (props.deconnect ? "#EAEBED" : "#0EA47A")};
+    background-color:${props => props.alternative ? "#FFFFFF" : (props.deconnect ? "#EAEBED" : "#364958")};
     margin-left:${props => props.offcanvas || props.simple ? "0rem" : "1rem"};
     margin-top:${props => props.offcanvas ? "2rem" : "0rem"};
 	border-radius:10px;
-	border:${props => props.deconnect ? "" : "1px solid #18ab29"};
+	border:${props => props.deconnect ? "" : "1px solid #364958"};
 	cursor:pointer;
-	color:${props => props.alternative ? "#0EA47A" : "#FFFFFF"};
+	color:${props => props.alternative ? "#364958" : "#FFFFFF"};
 	font-size:1rem;
     text-align:center;
 	padding:5px 10px;

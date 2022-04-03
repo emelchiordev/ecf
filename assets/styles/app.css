@@ -19,10 +19,26 @@ body {
 
 }
 
-h1, span, label, form{
+h1, h5, span, label, form, .bgcolor, tr{
     font-family: 'ArsenalRegular';
     color:'#364958';
 }
+
+
+.inactive {
+    color: #364958;
+    text-decoration: none;
+}
+
+.active {
+    color: #364958;
+    text-decoration: none;
+  }
+
+  a:hover {
+    cursor: pointer;
+    color: #0EA47A; 
+    }
 
 .rtf{
     z-index: 100 !important;
@@ -44,3 +60,9 @@ h1, span, label, form{
 }
 
 
+.bgcolor{
+    background-color: #364958 ;
+ color:#FFFFFF ;   
+}
+
+@import "@webpixels/css";
