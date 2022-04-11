@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ApiResource()]
-
 #[ORM\Entity(repositoryClass: InstructorRepository::class)]
 
 class Instructor extends User
@@ -141,7 +140,7 @@ class Instructor extends User
         return $this->avatar;
     }
 
-    public function setAvatar(?string $avatar): self
+    public function setAvatar(?MediaObject $avatar): self
     {
         $this->avatar = $avatar;
 

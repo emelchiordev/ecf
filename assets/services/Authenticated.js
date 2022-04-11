@@ -11,7 +11,7 @@ function tokenDateIsValid() {
         const currentDate = moment().unix()
         console.log(cookiesDecoded)
         if (currentDate < cookiesDecoded.exp) {
-            store.dispatch(setAuthenticated({ status: true, roles: cookiesDecoded.roles, avatar: cookiesDecoded.avatar }))
+            store.dispatch(setAuthenticated({ status: true, roles: cookiesDecoded.roles, avatar: cookiesDecoded.avatar, id: cookiesDecoded.id }))
             return true
         } else {
             store.dispatch(setAuthenticated(false))

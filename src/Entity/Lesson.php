@@ -2,25 +2,35 @@
 
 namespace App\Entity;
 
-use App\Repository\LessonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\LessonRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+#[ApiResource()]
 #[ORM\Entity(repositoryClass: LessonRepository::class)]
 class Lesson
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(["read"])]
     private $id;
 
     #[ORM\Column(type: 'text')]
+    #[Groups(["read"])]
     private $video;
 
     #[ORM\Column(type: 'text')]
+    #[Groups(["read"])]
     private $description;
 
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessons')]
     private $section;
+
+    #[Groups(["read"])]
+    #[ORM\Column(type: 'string', length: 255)]
+    private $title;
 
     public function getId(): ?int
     {
@@ -59,6 +69,18 @@ class Lesson
     public function setSection(?Section $section): self
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

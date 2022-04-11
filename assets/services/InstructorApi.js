@@ -15,4 +15,26 @@ async function setAccountStatus(idInstructor, value) {
     return response
 }
 
-export default { createInstructor, deleteInstructor, setAccountStatus }
+async function modifyInstructor(idInstructor, value) {
+    const response = await axios.patch("http://localhost:8000/api/instructors/" + idInstructor, { ...value },
+        {
+            headers: {
+                "Content-Type": "application/merge-patch+json",
+            }
+        }
+    )
+    return response
+}
+
+async function createAvatar(value) {
+    const response = await axios.post("http://localhost:8000/api/media_objects", value,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        }
+    )
+    return response
+}
+
+export default { createInstructor, deleteInstructor, setAccountStatus, createAvatar, modifyInstructor }

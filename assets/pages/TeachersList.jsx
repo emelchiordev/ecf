@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import FabButton from '../components/FabButton'
 import TeachersApi from '../services/TeachersApi'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InstructorApi from '../services/InstructorApi';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faTrashAlt,
     faEye,
     faThumbsUp,
     faThumbsDown
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 
 const TeachersList = () => {
-
+    const navigate = useNavigate()
     const [teachers, setTeachers] = useState([])
     const [description, setDescription] = useState('')
 
@@ -46,7 +47,7 @@ const TeachersList = () => {
 
         <div className="container">
 
-            <div className="card">
+            <div className="card" style={{ "marginTop": "1rem" }}>
                 <div className="card-header">
                     <h5>LES FORMATEURS</h5>
                 </div>
@@ -104,7 +105,7 @@ const TeachersList = () => {
             </div>
         </div>
 
-        <FabButton handleClick={() => useNavigate("ajouter")} />
+        <FabButton handleClick={() => navigate("../ajouter-formateur")} />
     </>
     )
 }

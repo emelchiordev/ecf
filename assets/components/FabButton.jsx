@@ -15,7 +15,7 @@ const FabButton = ({ handleClick }) => {
                 icon={<FontAwesomeIcon icon={faPlus} />}
                 text="Créer un formateur"
                 event={false}
-                onClick={() => navigate("../ajouter-formateur")}
+                onClick={handleClick}
             >
 
             </Fab>

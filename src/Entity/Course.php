@@ -2,31 +2,46 @@
 
 namespace App\Entity;
 
+use App\Entity\MediaObject;
+use App\Entity\CoursesObject;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CourseRepository;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource]
+#[ApiResource()]
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 class Course
 {
+    #[Groups(["getCourses"])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Groups(["getCourses"])]
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
+    #[Groups(["getCourses"])]
+    #[ORM\ManyToOne(targetEntity: CoursesObject::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    #[ApiProperty(iri: 'http://schema.org/image')]
+    public ?CoursesObject $photos = null;
+
+    #[Groups(["getCourses"])]
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[Groups(["getCourses"])]
     #[ORM\ManyToOne(targetEntity: Instructor::class, inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
     private $instructor;
 
+    #[Groups(["getCourses"])]
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Section::class)]
     private $section;
 
@@ -102,6 +117,19 @@ class Course
                 $section->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+
+    public function getPhoto(): ?CoursesObject
+    {
+        return $this->photos;
+    }
+
+    public function setAvatar(?CoursesObject $photos): self
+    {
+        $this->photos = $photos;
 
         return $this;
     }

@@ -1,17 +1,33 @@
-
 @font-face {
     font-family: "ArsenalRegular";
     src: url("./fonts/Arsenal-Regular.ttf") format("truetype");
     font-weight: bold;
-    }
+}
 
-    @font-face {
-        font-family: "Nunito";
-        src: url("./fonts/NunitoSans-Regular.ttf") format("truetype");
-        font-weight: bold;
-        };
- *{
-    font-family: 'Nunito';  
+@font-face {
+    font-family: "Nunito";
+    src: url("./fonts/NunitoSans-Regular.ttf") format("truetype");
+    font-weight: bold;
+}
+
+;
+
+input,
+textarea {
+    background-color: #F3E5F5;
+    border-radius: 50px !important;
+    padding: 12px 15px 12px 15px !important;
+    width: 100%;
+    box-sizing: border-box;
+    border: none !important;
+    border: 1px solid #F3E5F5 !important;
+    font-size: 16px !important;
+    color: #000 !important;
+    font-weight: 400
+}
+
+* {
+    font-family: 'Nunito';
 }
 
 body {
@@ -19,9 +35,17 @@ body {
 
 }
 
-h1, h5, span, label, form, .bgcolor, tr{
+
+h1,
+h2,
+h5,
+span,
+label,
+form,
+.bgcolor,
+tr {
     font-family: 'ArsenalRegular';
-    color:'#364958';
+    color: '#364958';
 }
 
 
@@ -31,38 +55,78 @@ h1, h5, span, label, form, .bgcolor, tr{
 }
 
 .active {
-    color: #364958;
+    color: #364958 !important;
     text-decoration: none;
-  }
+}
 
-  a:hover {
+a {
+    color: #0ea479c4;
+}
+
+a:hover {
     cursor: pointer;
-    color: #0EA47A; 
-    }
+    color: #0EA47A;
+}
 
-.rtf{
+.rtf {
     z-index: 100 !important;
 }
-.rtf--mb{
-   
+
+.rtf--mb {
+
     background-color: #364958 !important;
 }
-.form-control, .input-group-text{
-    border-radius: 10px;
-    border-color: #364958;
+
+input:focus,
+textarea:focus {
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #0EA47A !important;
+    outline-width: 0;
+    font-weight: 400
 }
-.input-group-text{
+
+
+.input-group {
+    outline: 0px !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #0ea4794f;
+    background-color: transparent;
+    border-color: transparent transparent #0EA47A;
+}
+
+a.nav-link {
+    color: #0EA47A;
+}
+
+a.nav-link:hover {
+    color: #0ea4794f;
+}
+
+a.nav-link.active {
+    color: #0ea4794f !important;
+}
+
+
+
+.input-group-text {
+    color: #FFFFFF;
+    border: 1px solid #0EA47A !important;
+    background-color: #0EA47A !important;
+}
+
+.bgcolor {
     background-color: #364958;
     color: #FFFFFF;
-}
-.input-form{
-    outline: none;
-}
-
-
-.bgcolor{
-    background-color: #364958 ;
- color:#FFFFFF ;   
 }
 
 @import "@webpixels/css";

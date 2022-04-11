@@ -10,3 +10,5 @@ api_platform:
         jsonld: ['application/ld+json']
         html: ['text/html']
         multipart: ['multipart/form-data']
+    defaults:
+        pagination_enabled: false

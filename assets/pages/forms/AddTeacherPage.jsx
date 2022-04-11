@@ -13,6 +13,7 @@ const AddTeacherPage = () => {
     const [instructor, setInstructor] = useState({
         accountValidate: true,
         roles: ["ROLES_INSTRUCTORS"],
+        avatar: "/api/media_objects/6",
         firstName: "",
         lastName: "",
         password: "",
@@ -69,7 +70,7 @@ const AddTeacherPage = () => {
             <form>
                 <div className='justify-content-between'>
                     <div className="row">
-                        <div className="input-group mb-3 col" error={errorValidation.firstName}>
+                        <div className=" mb-3 col" error={errorValidation.firstName}>
                             <input type="text" value={instructor.firstName} className="form-control" name='firstName' onChange={handleChange} placeholder="Nom" aria-label="firstname" aria-describedby="firstname" />
                             {errorValidation.firstName && <p className='invalid-feedback d-block'>{errorValidation.firstName}</p>}
                         </div>

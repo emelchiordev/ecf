@@ -16,13 +16,13 @@ const Button = ({ text, alternative, offcanvas, onclick, deconnect, simple, send
 
 const Wrapper = styled.div`
 
-    background-color:${props => props.alternative ? "#FFFFFF" : (props.deconnect ? "#EAEBED" : "#364958")};
+    background-color:${props => props.alternative ? "#FFFFFF" : (props.deconnect ? "#EAEBED" : "#0ea479c4")};
     margin-left:${props => props.offcanvas || props.simple ? "0rem" : "1rem"};
     margin-top:${props => props.offcanvas ? "2rem" : "0rem"};
 	border-radius:10px;
-	border:${props => props.deconnect ? "" : "1px solid #364958"};
+	border:${props => props.deconnect ? "" : "1px solid #0ea479c4"};
 	cursor:pointer;
-	color:${props => props.alternative ? "#364958" : "#FFFFFF"};
+	color:${props => props.alternative ? "#0ea479c4" : "#FFFFFF"};
 	font-size:1rem;
     text-align:center;
 	padding:5px 10px;

@@ -6,10 +6,6 @@ import Authenticated from '../services/Authenticated';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGears } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components'
-
-
-
-
 import Avatar from 'react-avatar';
 
 
@@ -39,7 +35,7 @@ const NavBar = ({ isAuthenticatedStatus }) => {
                     <a className="navbar-brand" href="#">
                         <img src={logo} width="185" height="47" alt="logo ECO IT" />
                     </a>
-
+                    <NavLink to='/inscription-formateur'>CATALOGUE DES FORMATIONS</NavLink>
                     <div className="ms-auto">
 
 
@@ -61,7 +57,7 @@ const NavBar = ({ isAuthenticatedStatus }) => {
 
                                     }
                                     {isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS") &&
-                                        <ButtonNav className='me-4' onClick={() => { navigate('/administration/formateurs') }}><FontAwesomeIcon icon={faGears} /> GERER MES FORMATIONS</ButtonNav>
+                                        <ButtonNav className='me-4' onClick={() => { navigate('/mes-cours') }}><FontAwesomeIcon icon={faGears} /> GERER MES FORMATIONS</ButtonNav>
 
                                     }
                                     <div className="dropdown me-2">
@@ -119,6 +115,7 @@ const NavBar = ({ isAuthenticatedStatus }) => {
                                 <ButtonNav className='me-4' data-bs-dismiss="offcanvas" onClick={() => { navigate('/administration/formateurs') }}><FontAwesomeIcon icon={faGears} /> LES FORMATEURS</ButtonNav>
                                 <Button offcanvas text="SE DECONNECTER" deconnect onclick={handleDisconnect} />
                             </>
+
                             :
 
                             <Button offcanvas onclick={handleConnect} text='SE CONNECTER' />}

@@ -6,4 +6,10 @@ const getTeachers = async () => {
 
 }
 
-export default { getTeachers }
+const getTeacher = async (id) => {
+    const response = await axios.get("http://localhost:8000/api/instructors/" + id)
+    return response
+
+}
+
+export default { getTeachers, getTeacher }

@@ -32,3 +32,8 @@ services:
     App\DataPersister\EcoItDataPersister:
         decorates: 'api_platform.doctrine.orm.data_persister'
         #tags: [ 'api_platform.data_persister' ]
+
+    App\Doctrine\CurrentUserExtension:
+        tags:
+            - { name: api_platform.doctrine.orm.query_extension.collection }
+            - { name: api_platform.doctrine.orm.query_extension.item }

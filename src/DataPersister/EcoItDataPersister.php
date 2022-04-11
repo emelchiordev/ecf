@@ -24,7 +24,7 @@ final class EcoItDataPersister implements ContextAwareDataPersisterInterface
 
     public function persist($data, array $context = [])
     {
-        if ($data instanceof Instructor) {
+        if ($data instanceof Instructor && ($context['collection_operation_name'] ?? null) === 'post') {
             $passwordHashed = $this->hasher->hashPassword($data, $data->getPassword());
             $data->setPassword($passwordHashed);
         }
@@ -33,6 +33,7 @@ final class EcoItDataPersister implements ContextAwareDataPersisterInterface
 
     public function remove($data, array $context = [])
     {
+        return $this->decorated->remove($data);
         // call your persistence layer to delete $data
     }
 }

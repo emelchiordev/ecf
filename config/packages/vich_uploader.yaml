@@ -8,3 +8,9 @@ vich_uploader:
             upload_destination: '%kernel.project_dir%/public/avatar'
             # Will rename uploaded files using a uniqueid as a prefix.
             namer: Vich\UploaderBundle\Naming\OrignameNamer
+
+        courses_object:
+            uri_prefix: /courses
+            upload_destination: '%kernel.project_dir%/public/courses'
+            # Will rename uploaded files using a uniqueid as a prefix.
+            namer: Vich\UploaderBundle\Naming\OrignameNamer

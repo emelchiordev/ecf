@@ -13,6 +13,7 @@ const RegisterTeacherPage = () => {
     const [instructor, setInstructor] = useState({
         accountValidate: true,
         roles: ["ROLES_INSTRUCTORS"],
+        avatar: "/api/media_objects/6",
         firstName: "",
         lastName: "",
         password: "",
