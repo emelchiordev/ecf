@@ -2,7 +2,11 @@
 
 namespace App\DataPersister;
 
+use DateTime;
+use App\Entity\Course;
+use App\Entity\Student;
 use App\Entity\Instructor;
+use App\Entity\CoursesObject;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -27,6 +31,17 @@ final class EcoItDataPersister implements ContextAwareDataPersisterInterface
         if ($data instanceof Instructor && ($context['collection_operation_name'] ?? null) === 'post') {
             $passwordHashed = $this->hasher->hashPassword($data, $data->getPassword());
             $data->setPassword($passwordHashed);
+        }
+
+        if ($data instanceof Student && ($context['collection_operation_name'] ?? null) === 'post') {
+            $passwordHashed = $this->hasher->hashPassword($data, $data->getPassword());
+            $data->setPassword($passwordHashed);
+        }
+
+        if ($data instanceof Course && ($context['collection_operation_name'] ?? null) === 'post') {
+            $date = new DateTime();
+            $data->setDateCreated($date);
+            $courseObject = new CoursesObject();
         }
         return $this->decorated->persist($data);
     }

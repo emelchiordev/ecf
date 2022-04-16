@@ -29,7 +29,7 @@ const CoursesEdit = () => {
         setActivePage(0)
         CoursesApi.getCourse(params.id).then(response => {
             setCourses({ ...courses, title: response.data.title, description: response.data.description })
-            CoursesApi.getPhoto(response.data.photos).then(res => setAvatar(res.data.contentUrl))
+            setAvatar(response.data.photos.contentUrl)
             setLoading(true)
         }).catch(e => console.log(e))
 
@@ -70,6 +70,7 @@ const CoursesEdit = () => {
     }
 
     const handleUplaodFile = (e) => {
+
         setSendingAvatar(true)
         let formData = new FormData()
         formData.append("file", e)
@@ -86,7 +87,6 @@ const CoursesEdit = () => {
 
     return (
         <div>
-            {console.log(courses)}
             <h1 className='mt-4'>MODIFIER LE COURS</h1>
             <p className='mt-4'>Cette page vous permet de modifier le titre et la description de ce cours</p>
 

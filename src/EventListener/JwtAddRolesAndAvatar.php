@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Repository\InstructorRepository;
+use App\Repository\StudentRepository;
 use App\Repository\UserRepository;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,16 +18,18 @@ class JwtAddRolesAndAvatar
     private $requestStack;
     private $instructorRepository;
     private $userRepository;
+    private $studentRepository;
 
 
     /**
      * @param RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack, InstructorRepository $instructorRepository, UserRepository $userRepository)
+    public function __construct(RequestStack $requestStack, InstructorRepository $instructorRepository, UserRepository $userRepository, StudentRepository $studentRepository)
     {
         $this->requestStack = $requestStack;
         $this->instructorRepository = $instructorRepository;
         $this->userRepository = $userRepository;
+        $this->studentRepository = $studentRepository;
     }
 
     /**
@@ -47,6 +50,13 @@ class JwtAddRolesAndAvatar
                 $payload['avatar'] = "/avatar/nullavatar.png";
             }
             $payload['id'] = $instructor->getId();
+        }
+
+        if (in_array('ROLES_STUDENT', $user->getRoles())) {
+            $actualUser = $this->userRepository->findOneBy(['email' => $user->getUserIdentifier()]);
+            $student = $this->studentRepository->find(($actualUser->getId()));
+            $payload["id"] = $student->getId();
+            $payload["pseudo"] = $student->getPseudonym();
         }
 
         $payload['roles'] = $user->getRoles();

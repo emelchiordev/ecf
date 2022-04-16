@@ -3,13 +3,17 @@ import styled from 'styled-components'
 import Arsenal from '../styles/fonts/Arsenal-Regular.ttf'
 
 
-const Button = ({ text, alternative, offcanvas, onclick, deconnect, simple, sending }) => {
+const Button = ({ text, alternative, offcanvas, onclick, deconnect, simple, sending, closeModal }) => {
 
 
     return (
-        <Wrapper alternative={alternative} simple={false} sending data-bs-dismiss={offcanvas ? "offcanvas" : null} offcanvas={offcanvas} onClick={onclick} deconnect={deconnect} >{sending ?
-            <><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span ><span> CHARGEMENT</span></>
-            : text}</Wrapper>
+        <Wrapper
+            alternative={alternative}
+            simple={false}
+            sending
+            data-bs-dismiss={offcanvas ? "offcanvas" : null || closeModal ? "modal" : null} offcanvas={offcanvas} onClick={onclick} deconnect={deconnect} >{sending ?
+                <><span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span ><span> CHARGEMENT</span></>
+                : text}</Wrapper>
 
     )
 }

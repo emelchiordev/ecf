@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom'
 
 const AddCoursePage = ({ isAuthenticatedStatus }) => {
 
-    const [courses, setCourses] = useState({ title: '', description: '', instructor: '/api/instructors/' + isAuthenticatedStatus.id })
+    const [courses, setCourses] = useState({ title: '', description: '', instructor: '/api/instructors/' + isAuthenticatedStatus.id, avatar: "/api/courses_objects/1" })
     const [success, setSucess] = useState(false)
     const [sending, setSending] = useState(false)
     const [errorValidation, setErrorValidation] = useState({

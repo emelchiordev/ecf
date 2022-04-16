@@ -10,8 +10,19 @@ const isAuthenticatedSlice = createSlice({
     }
 })
 
+const studentSlice = createSlice({
+    name: "student",
+    initialState: [],
+    reducers: {
+        setStudent(state, action) {
+            return state, action.payload
+        }
+    }
+})
+
 const rootReducer = combineReducers({
-    authenticated: isAuthenticatedSlice.reducer
+    authenticated: isAuthenticatedSlice.reducer,
+    student: studentSlice.reducer
 
 })
 const store = configureStore({
@@ -19,5 +30,6 @@ const store = configureStore({
 })
 
 export const { setAuthenticated } = isAuthenticatedSlice.actions
+export const { setStudent } = studentSlice.actions
 
 export default store

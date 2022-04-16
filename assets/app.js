@@ -23,6 +23,10 @@ import Courses from './pages/Courses';
 import Sections from './pages/Sections'
 import Lessons from './pages/Lessons'
 import AddLessonPage from './pages/forms/AddLessonPage';
+import CoursesCatalog from './container/CoursesCatalog';
+import RegisterStudentPage from './pages/forms/RegisterStudentPage';
+import CoursesProgress from './container/CoursesProgress';
+
 
 
 const App = () => {
@@ -37,8 +41,10 @@ const App = () => {
         <Provider store={store}>
             <Router>
                 <div style={{ "backgroundColor": "#fafafa", "height": '100vh' }}>
+
                     <NavBar />
                     <Routes>
+                        <Route path="inscription-etudiant" element={<RegisterStudentPage />}></Route>
                         <Route path="inscription-formateur" element={<RegisterTeacherPage />}></Route>
                         <Route path="/administration" element={<GuardedRoute ><Adminpage /></GuardedRoute>} >
                             <Route path="formateurs" element={<GuardedRoute ><TeachersList /></GuardedRoute>} >
@@ -47,6 +53,7 @@ const App = () => {
                             <Route path="ajouter-formateur" element={<GuardedRoute ><AddTeacherPage /></GuardedRoute>} ></Route>
 
                         </Route>
+                        <Route path="/catalogue" element={<GuardedRoute ><CoursesCatalog /></GuardedRoute>} ></Route>
                         <Route path="/ajouter-cours" element={<GuardedRoute ><AddCoursePage /></GuardedRoute>} ></Route>
                         <Route path="/editer-lecons/:id" element={<GuardedRoute ><AddLessonPage /></GuardedRoute>} >
                         </Route>
@@ -65,6 +72,8 @@ const App = () => {
                         </Route>
 
                         <Route path="/mon-profil" element={<GuardedRoute ><ProfilSetting /></GuardedRoute>} ></Route>
+                        <Route path="/suivi-cours/:id/:id" element={<GuardedRoute ><CoursesProgress /></GuardedRoute>}>
+                        </Route>
                         <Route path="/connexion" element={<Loginpage />} >
                         </Route>
                         <Route path="/" element={<Homepage />}>

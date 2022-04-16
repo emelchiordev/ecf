@@ -50,12 +50,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CoursesObject
 {
 
-    #[Groups(["getCourses"])]
+    #[Groups(['courses_object:read'])]
     #[ORM\Id, ORM\Column, ORM\GeneratedValue]
     private ?int $id = null;
 
+
     #[ApiProperty(iri: 'http://schema.org/contentUrl')]
-    #[Groups(['courses_object:read'])]
+    #[Groups(['courses_object:read', 'courseStudent', 'students'])]
     public ?string $contentUrl = null;
 
     /**

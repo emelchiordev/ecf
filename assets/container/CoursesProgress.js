@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import NavBar from "../components/NavBar"
+import CoursesProgress from "../pages/CoursesProgress"
 import { setStudent } from "../store"
 
 const mapStateToProps = state => {
@@ -15,6 +15,6 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const NavBarContainer = connect(mapStateToProps, mapDispatchToProps)(NavBar)
+const CoursesProgressContainer = connect(mapStateToProps, mapDispatchToProps)(CoursesProgress)
 
-export default NavBarContainer
+export default CoursesProgressContainer

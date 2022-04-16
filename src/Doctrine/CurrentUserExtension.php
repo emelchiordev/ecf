@@ -2,12 +2,16 @@
 
 namespace App\Doctrine;
 
+use App\Entity\Course;
+use App\Entity\Lesson;
+use App\Entity\Student;
+use App\Entity\LessonStudents;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Security;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
-use App\Entity\Course;
+use Doctrine\ORM\Query\Lexer;
 
 final class CurrentUserExtension implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
@@ -29,14 +33,24 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
 
     private function addWhere(QueryBuilder $queryBuilder, string $resourceClass): void
     {
+
+        $user = $this->security->getUser();
         //dd("encore avant");
-        if (Course::class !== $resourceClass || null === ($user = $this->security->getUser())) {
+
+
+
+        if (Course::class === $resourceClass && $this->security->getToken()->getRoleNames()[0] == "ROLES_INSTRUCTORS") {
+            $rootAlias = $queryBuilder->getRootAliases()[0];
+            $queryBuilder->andWhere(sprintf('%s.instructor = :current_user', $rootAlias));
+            $queryBuilder->setParameter('current_user', $user->getId());
+        }
+
+        if (Course::class === $resourceClass && $this->security->getToken()->getRoleNames()[0] == "ROLES_STUDENT") {
+        }
+
+        if (Course::class !== $resourceClass ||  null === $user || $this->security->getToken()->getRoleNames()[0] == "ROLES_STUDENT") {
 
             return;
         }
-
-        $rootAlias = $queryBuilder->getRootAliases()[0];
-        $queryBuilder->andWhere(sprintf('%s.instructor = :current_user', $rootAlias));
-        $queryBuilder->setParameter('current_user', $user->getId());
     }
 }

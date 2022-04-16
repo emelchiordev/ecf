@@ -129,4 +129,53 @@ a.nav-link.active {
     color: #FFFFFF;
 }
 
+.footer {
+    display: block;
+    box-sizing: border-box;
+    height: 500px;
+    background-color: #0ea47a;
+    clip-path: ellipse(78% 100% at 29.84% 100%);
+}
+
+.side-navbar {
+    width: 180px;
+    height: 100%;
+    position: fixed;
+    margin-left: -300px;
+    background-color: #100901;
+    transition: 0.5s;
+}
+
+.nav-link:active,
+.nav-link:focus,
+.nav-link:hover {
+    background-color: #ffffff26;
+}
+
+.my-container {
+    transition: 0.4s;
+}
+
+.active-nav {
+    margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+    margin-left: 180px;
+}
+
+#menu-btn {
+    background-color: #100901;
+    color: #fff;
+    margin-left: -62px;
+}
+
+.form-controls {
+    border-radius: 15px;
+}
+
+
+
+
 @import "@webpixels/css";

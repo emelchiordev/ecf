@@ -22,11 +22,12 @@ class Section
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(["read"])]
+    #[Groups(["read", 'courseStudent'])]
     private $id;
 
 
-    #[Groups(["read"])]
+
+    #[Groups(["read", 'courseStudent'])]
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
@@ -34,7 +35,7 @@ class Section
     #[ORM\ManyToOne(targetEntity: Course::class, inversedBy: 'section')]
     private $course;
 
-    #[Groups(["read"])]
+    #[Groups(["read", 'courseStudent'])]
     #[ORM\OneToMany(mappedBy: 'section', targetEntity: Lesson::class)]
     private $lessons;
 
