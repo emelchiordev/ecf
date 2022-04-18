@@ -133,7 +133,7 @@ const CoursesEdit = () => {
                     </div>
                     {success &&
                         <div className="alert alert-success" role="alert">
-                            Votre cours a bien été modifié.
+                            Votre cours a bien été modifié !
                         </div>
                     }
 
