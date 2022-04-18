@@ -5,6 +5,7 @@ import Button from '../components/Button'
 import InstructorApi from '../services/InstructorApi'
 import FormData from 'form-data';
 import TeachersApi from '../services/TeachersApi'
+import { ROOT_URL } from '../services/config'
 
 
 const ProfilSetting = ({ isAuthenticatedStatus }) => {
@@ -78,7 +79,7 @@ const ProfilSetting = ({ isAuthenticatedStatus }) => {
                         <h2>PHOTO DE PROFIL</h2>
                         <p>Ajoutez votre photo pour que l'on vous reconnaisse plus facilement</p>
                         <div className='d-flex justify-content-center mt-4'>
-                            <Avatar src={"http://localhost:8000/" + avatar} size="175" round={true} color="#364958" />
+                            <Avatar src={ROOT_URL + "/" + avatar} size="175" round={true} color="#364958" />
 
                         </div>
                         <div className='mt-4'>

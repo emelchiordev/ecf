@@ -1,22 +1,23 @@
 import axios from "axios"
+import { API_URL } from "./config"
 
 async function createInstructor(instructor) {
-    const response = await axios.post("http://localhost:8000/api/instructors", { ...instructor })
+    const response = await axios.post(API_URL + "instructors", { ...instructor })
     return response
 }
 
 async function deleteInstructor(idInstructor) {
-    const response = await axios.delete("http://localhost:8000/api/instructors/" + idInstructor)
+    const response = await axios.delete(API_URL + "instructors/" + idInstructor)
     return response
 }
 
 async function setAccountStatus(idInstructor, value) {
-    const response = await axios.put("http://localhost:8000/api/instructors/" + idInstructor, { ...value })
+    const response = await axios.put(API_URL + "instructors/" + idInstructor, { ...value })
     return response
 }
 
 async function modifyInstructor(idInstructor, value) {
-    const response = await axios.patch("http://localhost:8000/api/instructors/" + idInstructor, { ...value },
+    const response = await axios.patch(API_URL + "instructors/" + idInstructor, { ...value },
         {
             headers: {
                 "Content-Type": "application/merge-patch+json",
@@ -27,7 +28,7 @@ async function modifyInstructor(idInstructor, value) {
 }
 
 async function createAvatar(value) {
-    const response = await axios.post("http://localhost:8000/api/media_objects", value,
+    const response = await axios.post(API_URL + "media_objects", value,
         {
             headers: {
                 "Content-Type": "multipart/form-data",

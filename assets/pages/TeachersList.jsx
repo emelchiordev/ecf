@@ -4,6 +4,7 @@ import TeachersApi from '../services/TeachersApi'
 import InstructorApi from '../services/InstructorApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from 'react-avatar'
+import { ROOT_URL } from '../services/config';
 
 import {
     faTrashAlt,
@@ -68,7 +69,7 @@ const TeachersList = () => {
                                 return (
                                     <tr key={teacher.id}>
                                         {console.log(teacher.id)}
-                                        <td > <Avatar src={"http://localhost:8000" + teacher.avatar.contentUrl} size="50" round={true} color="#364958" /> <a className="text-heading font-semibold" href="#"> {teacher.firstName} {teacher.lastName}</a> </td>
+                                        <td > <Avatar src={ROOT_URL + teacher.avatar.contentUrl} size="50" round={true} color="#364958" /> <a className="text-heading font-semibold" href="#"> {teacher.firstName} {teacher.lastName}</a> </td>
                                         <td> <span>{teacher.email}</span> </td>
                                         <td > <span className={teacher.accountValidate ? "badge bg-soft-success text-success" : "badge bg-soft-warning text-warning"}>{teacher.accountValidate ? "Validé" : "Non confirmé"}</span> </td>
                                         <td>

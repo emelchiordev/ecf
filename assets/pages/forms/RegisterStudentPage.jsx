@@ -90,7 +90,6 @@ const RegisterStudentPage = () => {
                         </div>
 
 
-
                     </div>
                     <div className='mt-10 text-center'>
                         <p>En vous inscrivant, vous acceptez nos conditions générales d'utilisation et notre politique de confidentialité.</p>

@@ -73,6 +73,8 @@ const CoursesList = ({ isAuthenticatedStatus }) => {
         navigate('/cours/' + id + '/editer')
     }
 
+
+
     if (accountValide === false) {
         return (
 

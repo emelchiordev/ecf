@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import Avatar from 'react-avatar';
 import StudentApi from '../services/StudentApi';
 import Logo from './Logo';
+import { ROOT_URL } from "../services/config"
 
 
 
@@ -129,7 +130,7 @@ const NavBar = ({ isAuthenticatedStatus, studentStore, setStudentToStore, course
                                     <div className="dropdown me-2">
                                         {isAuthenticatedStatus.roles.includes("ROLES_INSTRUCTORS") &&
                                             <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <Avatar src={"http://localhost:8000/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
+                                                <Avatar src={ROOT_URL + "/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
                                             </a>
                                         }
                                         {isAuthenticatedStatus.roles.includes("ROLES_STUDENT") && <>
@@ -193,7 +194,7 @@ const NavBar = ({ isAuthenticatedStatus, studentStore, setStudentToStore, course
                                     <>
                                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                         </a>
-                                        <Avatar src={"http://localhost:8000/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
+                                        <Avatar src={ROOT_URL + "/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
 
                                         <ButtonNav data-bs-dismiss='offcanvas' className='mt-4' onClick={() => { navigate('/mes-cours') }}><FontAwesomeIcon icon={faGears} /> GERER MES FORMATIONS</ButtonNav>
                                     </>
