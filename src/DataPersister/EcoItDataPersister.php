@@ -30,6 +30,7 @@ final class EcoItDataPersister implements ContextAwareDataPersisterInterface
     {
         if ($data instanceof Instructor && ($context['collection_operation_name'] ?? null) === 'post') {
             $passwordHashed = $this->hasher->hashPassword($data, $data->getPassword());
+            $data->setAccountValidate(false);
             $data->setPassword($passwordHashed);
         }
 
@@ -40,6 +41,7 @@ final class EcoItDataPersister implements ContextAwareDataPersisterInterface
 
         if ($data instanceof Course && ($context['collection_operation_name'] ?? null) === 'post') {
             $date = new DateTime();
+            $data->setPublished(false);
             $data->setDateCreated($date);
             $courseObject = new CoursesObject();
         }

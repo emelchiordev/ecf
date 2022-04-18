@@ -10,6 +10,12 @@ async function getCourses() {
     return response
 }
 
+async function getPublishedCourses() {
+    const response = await axios.get("http://localhost:8000/api/courses?published=true")
+    return response
+}
+
+
 async function getPhoto(url) {
     const response = await axios.get("http://localhost:8000" + url)
     return response
@@ -17,6 +23,11 @@ async function getPhoto(url) {
 
 async function getCourse(id) {
     const response = await axios.get("http://localhost:8000/api/courses/" + id)
+    return response
+}
+
+async function getCoursesInstructor(id) {
+    const response = await axios.get("http://localhost:8000/api/courses?instructor=" + id)
     return response
 }
 
@@ -41,5 +52,11 @@ async function removeCourse(id) {
     return response
 }
 
+async function getFilteredCourses() {
+    const response = await axios.get("http://localhost:8000/api/courses?order[dateCreated]&itemsPerPage=3&published=true")
+    return response
+}
 
-export default { createCourse, getCourses, removeCourse, getCourse, modifyCourse, createPhoto, getPhoto }
+
+
+export default { createCourse, getCourses, removeCourse, getCourse, modifyCourse, createPhoto, getPhoto, getFilteredCourses, getCoursesInstructor, getPublishedCourses }

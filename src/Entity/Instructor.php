@@ -13,7 +13,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
-#[ApiResource()]
+#[ApiResource(
+    collectionOperations: [
+        "get" => [
+            'method' => "get",
+            'normalization_context' => ['groups' => ['instructor']]
+        ],
+        'post' => [
+            'method' => "post"
+        ]
+    ]
+)]
 #[ORM\Entity(repositoryClass: InstructorRepository::class)]
 
 class Instructor extends User
@@ -23,24 +33,30 @@ class Instructor extends User
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Groups('instructor')]
     #[Assert\NotBlank(message: "Vous devez saisir un nom")]
     #[ORM\Column(type: 'string', length: 50)]
     private $firstName;
 
+    #[Groups('instructor')]
     #[Assert\NotBlank(message: "Vous devez saisir un prénom")]
     #[ORM\Column(type: 'string', length: 50)]
     private $lastName;
 
+    #[Groups('instructor')]
     #[Assert\NotBlank(message: "Vous devez saisir une descrption")]
     #[ORM\Column(type: 'text')]
     private $description;
 
+    #[Groups('instructor')]
     #[ORM\Column(type: 'boolean')]
     private $accountValidate;
 
+    #[Groups('instructor')]
     #[ORM\OneToMany(mappedBy: 'instructor', targetEntity: Course::class, orphanRemoval: true)]
     private $courses;
 
+    #[Groups('instructor')]
     #[ORM\ManyToOne(targetEntity: MediaObject::class)]
     #[ORM\JoinColumn(nullable: true)]
     #[ApiProperty(iri: 'http://schema.org/image')]
@@ -55,7 +71,8 @@ class Instructor extends User
     public function getId(): ?int
     {
         return $this->id;
-    }*/
+    }
+    */
 
     public function getFirstName(): ?string
     {

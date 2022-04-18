@@ -33,7 +33,7 @@ const AddCoursePage = ({ isAuthenticatedStatus }) => {
             }
         }).catch(error => {
             if (error.response.data['violations']) {
-
+                setSending(false)
                 const apiError = {}
                 error.response.data['violations'].map(error => {
                     apiError[error.propertyPath] = error.message
@@ -45,11 +45,11 @@ const AddCoursePage = ({ isAuthenticatedStatus }) => {
     }
 
     return (
-        <div className='container d-flex flex-column align-items-center '>
-            <NavLink to='../mes-cours' className='mt-4 align-self-end pe-auto'><FontAwesomeIcon icon={faCircleArrowLeft} size="1,5x" /> RETOUR</NavLink>
+        <div className='container d-flex flex-column align-items-center h-100'>
+            <NavLink to='../mes-cours' className='mt-4 align-self-end pe-auto'><FontAwesomeIcon icon={faCircleArrowLeft} size="1x" /> RETOUR</NavLink>
             <Wrapper>
 
-                <h1>Ajouter un cours</h1>
+                <h1 className='mt-5'>Ajouter un cours</h1>
 
                 <form>
                     <div className='justify-content-between'>
@@ -70,7 +70,7 @@ const AddCoursePage = ({ isAuthenticatedStatus }) => {
                             </div>
                         </div>
                         <div className="row justify-content-center mb-4">
-                            <div className="col-2">
+                            <div className="col-3">
                                 <Button text="AJOUTER" simple sending={sending} onclick={handleSubmit}></Button>
                             </div>
                         </div>
@@ -95,7 +95,7 @@ const AddCoursePage = ({ isAuthenticatedStatus }) => {
 const Wrapper = styled.div`
 margin-top:1rem;
 background-color:#fff;
-width:100%;
+width:75%;
 text-align:center;
 border-radius:15px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

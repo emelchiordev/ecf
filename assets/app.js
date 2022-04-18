@@ -1,6 +1,7 @@
 
 import './styles/app.css';
 import './bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './container/NavBar';
@@ -16,7 +17,6 @@ import { HashRouter as Router, Routes, Route, Outlet } from "react-router-dom"
 import TeachersList from './pages/TeachersList';
 import RegisterTeacherPage from './pages/forms/RegisterTeacherPage';
 import ProfilSetting from './container/ProfilSetting';
-import CoursesList from './pages/CoursesList';
 import AddCoursePage from './container/AddCoursePage';
 import CoursesEdit from './pages/CoursesEdit';
 import Courses from './pages/Courses';
@@ -26,6 +26,9 @@ import AddLessonPage from './pages/forms/AddLessonPage';
 import CoursesCatalog from './container/CoursesCatalog';
 import RegisterStudentPage from './pages/forms/RegisterStudentPage';
 import CoursesProgress from './container/CoursesProgress';
+import Footer from './pages/Footer';
+import CoursesList from './container/CoursesList';
+import Politique from './pages/Politique';
 
 
 
@@ -40,7 +43,7 @@ const App = () => {
     return <>
         <Provider store={store}>
             <Router>
-                <div style={{ "backgroundColor": "#fafafa", "height": '100vh' }}>
+                <div style={{ "backgroundColor": "#fafafa", "height": '100vh', "position": "relative" }}>
 
                     <NavBar />
                     <Routes>
@@ -53,7 +56,7 @@ const App = () => {
                             <Route path="ajouter-formateur" element={<GuardedRoute ><AddTeacherPage /></GuardedRoute>} ></Route>
 
                         </Route>
-                        <Route path="/catalogue" element={<GuardedRoute ><CoursesCatalog /></GuardedRoute>} ></Route>
+                        <Route path="/catalogue" element={<CoursesCatalog />} ></Route>
                         <Route path="/ajouter-cours" element={<GuardedRoute ><AddCoursePage /></GuardedRoute>} ></Route>
                         <Route path="/editer-lecons/:id" element={<GuardedRoute ><AddLessonPage /></GuardedRoute>} >
                         </Route>
@@ -76,9 +79,13 @@ const App = () => {
                         </Route>
                         <Route path="/connexion" element={<Loginpage />} >
                         </Route>
+                        <Route path="/politique-confidentialite" element={<Politique />}></Route>
+
+                        <Route path="/test" element={<Homepage />}></Route>
                         <Route path="/" element={<Homepage />}>
                         </Route>
                     </Routes>
+                    <Footer />
                 </div>
             </Router>
         </Provider>

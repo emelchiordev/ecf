@@ -10,6 +10,8 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ApiResource(
     normalizationContext: ["groups" => ['read']]
@@ -26,7 +28,7 @@ class Section
     private $id;
 
 
-
+    #[Assert\NotBlank(message: "Vous devez saisir un titre pour votre section")]
     #[Groups(["read", 'courseStudent'])]
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
@@ -36,7 +38,7 @@ class Section
     private $course;
 
     #[Groups(["read", 'courseStudent'])]
-    #[ORM\OneToMany(mappedBy: 'section', targetEntity: Lesson::class)]
+    #[ORM\OneToMany(mappedBy: 'section', targetEntity: Lesson::class, cascade: ["remove"])]
     private $lessons;
 
     public function __construct()

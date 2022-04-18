@@ -38,6 +38,10 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
         //dd("encore avant");
 
 
+        if (Course::class === $resourceClass && $this->security->getToken() === null) {
+            return;
+        }
+
 
         if (Course::class === $resourceClass && $this->security->getToken()->getRoleNames()[0] == "ROLES_INSTRUCTORS") {
             $rootAlias = $queryBuilder->getRootAliases()[0];

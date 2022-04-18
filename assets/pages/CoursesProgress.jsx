@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import CoursesApi from '../services/CoursesApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSquareCheck, faCircleArrowLeft, faCircleArrowRight } from '@fortawesome/free-solid-svg-icons'
@@ -11,9 +11,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import CoursesStudentApi from '../services/CoursesStudentApi'
 import 'react-toastify/dist/ReactToastify.css';
 
-const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStore }) => {
+const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStore, setCourseToStore, setLessonToStore, setPercentageStore }) => {
 
     const params = useParams()
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const [loading, setLoading] = useState(true)
     const [courses, setCourses] = useState([])
@@ -28,17 +30,19 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
     const [currentPage, setCurrentPage] = useState(0)
     const [percentage, setPercentage] = useState(0)
     const [courseStatus, setCourseStatus] = useState(false)
+    const [studentCourse, setStudentCourse] = useState([])
 
     useEffect(() => {
         if (isAuthenticatedStatus && isAuthenticatedStatus.roles.includes('ROLES_STUDENT')) {
             StudentApi.getStudent(isAuthenticatedStatus.id).then(res => {
                 if (res.status === 200) {
+                    setStudentCourse(res.data.coursesStudents)
                     setStudentToStore(res.data)
                 }
             })
         }
-    }, [reloadStudent])
 
+    }, [reloadStudent])
 
 
     useEffect(() => {
@@ -47,15 +51,20 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
             let lessonFinish = []
             studentStore.lessonStudents.forEach(element => lessonFinish = [...lessonFinish, element.lesson.id])
             setLessonStatus(lessonFinish)
-
+            //   setLessonToStore(lessonFinish)
             if (lessonFlat !== []) {
                 const lessonId = lessonFlat.map(lesson => lesson.id)
                 const newArray = lessonFinish.filter(elt => lessonId.includes(elt))
                 setPercentage((newArray.length * 100) / lessonId.length)
+                setPercentageStore((newArray.length * 100) / lessonId.length)
             }
         }
 
-        return () => setLessonStatus([])
+        return () => {
+            //    setCurrentPage(0)
+            setLessonStatus([])
+        }
+
 
     }, [studentStore, courses])
 
@@ -73,18 +82,19 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
                 res.data.section.map(element => lessonLength += element.lessons.length)
                 setLessonFlat(lessonArray)
                 setNbLesson(lessonLength)
+                setCourseToStore(res.data)
                 setCourses(res.data)
                 setLoading(false)
             }
 
         })
         return () => {
-            setCourses([])
             setCurrentPage(0)
+            setCourses([])
         }
     }, [params])
 
-    const handleLesson = (lesson, current) => {
+    const handleLesson = (lesson) => {
         setCurrentPage(parseInt(Object.keys(lessonFlat).find(k => lessonFlat[k] === lesson)))
         setLesson(lesson)
     }
@@ -92,6 +102,7 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
     useEffect(() => {
         if (studentStore.coursesStudents !== undefined) {
             const studenterFilterCoures = studentStore.coursesStudents.filter(elt => elt.courses.id == params.id)
+            console.log()
             setCourseStatus(studenterFilterCoures[0].statusProgress)
 
             if (percentage === 100 && studenterFilterCoures[0].statusProgress == false) {
@@ -119,7 +130,6 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
     }, [percentage])
 
     const handleValideLesson = () => {
-
         setSending(true)
         LessonStudentApi.setValideLesson({ statusLesson: true, lesson: "/api/lessons/" + lesson.id, student: "/api/students/" + isAuthenticatedStatus.id }).then(res => {
             if (res.status === 201) {
@@ -153,6 +163,10 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
         })
     }
 
+    const handleStartCourses = (coursesId) => {
+        navigate("/suivi-cours/" + isAuthenticatedStatus.id + "/" + coursesId.courses.id)
+    }
+
     const handlePagination = (nb) => {
         if (nb === (+1) && currentPage + (nb) === nbLesson) {
             return
@@ -166,14 +180,20 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
     }
 
     if (loading) {
-        return (
-            <Spinner className="spinner-grow" role="status">
 
-            </Spinner>
+        return (
+            <div className='h-100'>
+                <Spinner className="spinner-grow" role="status">
+
+                </Spinner>
+            </div>
         )
     } else {
         return (
+
+
             <div className='d-flex'>
+                {console.log(currentPage)}
 
                 <Wrapper className='d-none d-lg-block' style={{ "color": "#FFFFFF" }}>
                     <div>
@@ -182,8 +202,6 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
                             <div className='display-5'>{percentage} %</div>
 
                         </Curves>
-
-
 
 
                         <div> <span>Formation : {courses.title} </span></div>
@@ -242,6 +260,60 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
                     <ToastContainer />
                 </Wrapper2>
 
+
+                <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel">
+                    <div className="offcanvas-header">
+                        <ButtonNav className='me-4'>
+
+                            <div className="btn-group">
+                                <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    MES FORMATIONS
+                                </button>
+                                <ul className="dropdown-menu">
+                                    {studentCourse && studentCourse.map(student => {
+                                        return (
+                                            <li key={Math.random()}><a className="dropdown-item  nav-link" data-bs-toggle="offcanvas" onClick={() => handleStartCourses(student)}>{student.courses.title}</a></li>
+                                        )
+                                    })
+                                    }
+                                </ul>
+                            </div>
+                        </ButtonNav>
+                        <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div className="offcanvas-body">
+
+                        <Wrapper3 className='' style={{ "color": "#FFFFFF" }}>
+
+                            <div>
+                                <Curves className='d-flex flex-column align-items-center justify-content-center position-relative'>
+                                    <div className='mt-2'>{courses.title}</div>
+                                    <div className='display-5'>{percentage} %</div>
+
+                                </Curves>
+
+
+
+                                <div> <span>Formation : {courses.title} </span></div>
+                                <div>{courses.section.map(section => {
+                                    return (<ul className='mt-10' key={section.id}><h5>{section.title}</h5>
+
+                                        {section.lessons.map(lesson => {
+                                            return (<li className='mt-4 ms-3' key={lesson.id}>
+                                                <a className='link ' data-bs-toggle="offcanvas" onClick={() => handleLesson(lesson)}><FontAwesomeIcon icon={faSquareCheck} size="1x" /> {lessonStatus.includes(lesson.id) ? <del>{lesson.title}</del> : lesson.title}</a>
+                                            </li>)
+                                        })}
+                                    </ul>)
+                                })}</div>
+
+                            </div>
+                            <div>
+                            </div>
+                        </Wrapper3>
+                    </div>
+                </div>
+
             </div>
 
         )
@@ -253,6 +325,14 @@ const Spinner = styled.div`
 position: absolute;
 left: 50%;
 top: 50%;
+`
+
+const ButtonNav = styled.span`
+cursor:pointer;
+color:#364958;
+&:hover {
+    color: #67C5AB;
+  }
 `
 const Curves = styled.div`
 display: block;
@@ -267,6 +347,12 @@ const Wrapper = styled.div`
 width:350px;
 height:100%;
 box-shadow: 3px 0px 14px -6px rgba(0,0,0,0.83);
+background-color:#fff;
+`
+
+const Wrapper3 = styled.div`
+width:100%;
+height:100%;
 background-color:#fff;
 `
 const Wrapper2 = styled.div`

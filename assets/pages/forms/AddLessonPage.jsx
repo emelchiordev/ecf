@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import LessonApi from '../../services/LessonApi';
@@ -11,6 +11,9 @@ import Button from '../../components/Button';
 const AddLessonPage = () => {
 
     const params = useParams()
+    const navigate = useNavigate()
+    const location = useLocation()
+
     const [editorState, setEditorState] = useState()
     const [lesson, setLesson] = useState([])
     const [link, setLink] = useState("")
@@ -33,9 +36,7 @@ const AddLessonPage = () => {
 
         }).catch(e => console.log(e))
 
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent())
-        }
+
     }
 
     useEffect(() => {
@@ -120,7 +121,7 @@ const AddLessonPage = () => {
                     <hr className='mt-10 mb-10' />
 
                     <h5 className='mt-8'>LIEN DE LA VIDEO</h5>
-
+                    <p className='mt-1'><i>Exemple : https://www.youtube.com/embed/B_vCy1uTg68</i></p>
                     <div className="input-group mb-3 w-50 d-flex mt-4">
                         <input type="text" defaultValue={lesson.video} onChange={handleChange} className="form-control" name='video' aria-label="video" aria-describedby="video" />
                         {errorValidation.title && <p className='invalid-feedback d-block'>{errorValidation.title}</p>}

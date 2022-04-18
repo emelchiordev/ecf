@@ -20,11 +20,14 @@ const Sections = () => {
     const [editSection, setEditSection] = useState([])
     const [sections, setSections] = useState([])
     const [updatePage, setUpdatePage] = useState(false)
+    const [sending, setSending] = useState(false)
 
 
     useEffect(() => {
         setActivePage(1)
     }, [])
+
+
     useEffect(() => {
 
         SectionsApi.getSectionsFilter(params.id).then(response => {
@@ -32,7 +35,7 @@ const Sections = () => {
                 setSections(response.data)
                 setLoading(true)
             }
-        }).catch(e => console.log(e))
+        }).catch(error => console.log(error))
 
         return () => {
             setSections([])
@@ -50,20 +53,35 @@ const Sections = () => {
     }
 
     const handleChangeEdit = (e) => {
+
         setEditSection({ ...editSection, [e.target.name]: e.target.value })
 
     }
 
     const handleSubmit = () => {
+        setSuccess({ success: false })
+        setErrorValidation({ title: '' })
+        setSending(true)
         SectionsApi.createSections({ ...section, course: '/api/courses/' + params.id }).then(response => {
+            setSending(false)
             setUpdatePage(!updatePage)
             setSuccess({ ...success, success: true, message: "La section a bien été créée ! " })
-
             setSection({ title: "" })
-        }).catch(e => console.log(e))
+        }).catch(error => {
+            if (error.response.data['violations']) {
+                setSending(false)
+                const apiError = {}
+                error.response.data['violations'].map(error => {
+                    apiError[error.propertyPath] = error.message
+                })
+                setErrorValidation(apiError)
+            }
+
+        })
     }
 
     const handleEdit = (idSection) => {
+        setSuccess({ success: false })
         SectionsApi.modifySections(idSection, { ...section, title: editSection[idSection] }).then(response => {
             setUpdatePage(!updatePage)
             setSuccess({ ...success, success: true, message: "La section a bien été modifiée ! " })
@@ -71,6 +89,8 @@ const Sections = () => {
     }
 
     const handleRemove = (id) => {
+        setSuccess({ success: false })
+
         SectionsApi.removeSection(id).then(response => {
             if (response.status === 204) {
                 setUpdatePage(!updatePage)
@@ -102,7 +122,7 @@ const Sections = () => {
                                     <tr key={section.id}>
                                         <td>
                                             <div className="input-group mb-3 col">
-                                                <input type="text" defaultValue={section.title} value={editSection.key} className="form-control" name={section.id} onChange={handleChangeEdit} placeholder="Prénom" aria-label="lastname" aria-describedby="lastname" />
+                                                <input type="text" defaultValue={section.title} value={editSection.key} className="form-control" name={section.id} onChange={handleChangeEdit} aria-label="lastname" aria-describedby="lastname" />
                                                 {errorValidation.lastName && <p className='invalid-feedback d-block'>{errorValidation.lastName}</p>}
                                             </div>
                                         </td>
@@ -128,9 +148,11 @@ const Sections = () => {
                             <div className="col-lg-6">
                                 <div className="input-group mb-3" error={errorValidation.title}>
                                     <input type="text" value={section.title} className="form-control" name='title' onChange={handleChange} placeholder="Titre de la section" aria-label="section" aria-describedby="section" />
-                                    {errorValidation.title && <p className='invalid-feedback d-block'>{errorValidation.title}</p>}
-                                    <Button simple={true} text="AJOUTER" onclick={handleSubmit}></Button>
+                                    <Button sending={sending} simple={true} text="AJOUTER" onclick={handleSubmit}></Button>
+
+
                                 </div>
+                                {errorValidation.title && <p className='invalid-feedback d-block'>{errorValidation.title}</p>}
                             </div>
                         </div>
                     </div>

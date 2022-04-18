@@ -71,7 +71,7 @@ const ProfilSetting = ({ isAuthenticatedStatus }) => {
     }
 
     return (
-        <div >
+        <div className=' h-75'>
             <div className="container">
                 <div className="row justify-content-between align-items-stretch">
                     <CardWrapper className='col-lg-4 align-self-start'>

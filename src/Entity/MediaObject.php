@@ -51,7 +51,7 @@ class MediaObject
     private ?int $id = null;
 
     #[ApiProperty(iri: 'http://schema.org/contentUrl')]
-    #[Groups(['media_object:read'])]
+    #[Groups(['media_object:read', 'instructor'])]
     public ?string $contentUrl = null;
 
     /**

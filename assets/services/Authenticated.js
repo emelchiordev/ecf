@@ -10,7 +10,7 @@ function tokenDateIsValid() {
         const cookiesDecoded = jwt_decode(Cookies.get('jwt_hp'))
         const currentDate = moment().unix()
         if (currentDate < cookiesDecoded.exp) {
-            store.dispatch(setAuthenticated({ status: true, roles: cookiesDecoded.roles, avatar: cookiesDecoded.avatar, id: cookiesDecoded.id, pseudo: cookiesDecoded.pseudo }))
+            store.dispatch(setAuthenticated({ status: true, roles: cookiesDecoded.roles, avatar: cookiesDecoded.avatar, id: cookiesDecoded.id, pseudo: cookiesDecoded.pseudo, accountValidate: cookiesDecoded.accountValidate }))
             return true
         } else {
             store.dispatch(setAuthenticated(false))

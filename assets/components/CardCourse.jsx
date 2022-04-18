@@ -9,8 +9,7 @@ const CardCourse = ({ image, title, description, handleFollow }) => {
             <Wrapper image>
                 <Image src={image} width='100%' height='100%' />
 
-                <h4 className='mt-2 p-2'>{title}</h4>
-                <p className='mt-2 p-2'>{description}</p>
+                <h5 className='mt-2 p-2 text-center'>{title}</h5>
             </Wrapper>
 
         </div >
@@ -19,7 +18,6 @@ const CardCourse = ({ image, title, description, handleFollow }) => {
 
 const Wrapper = styled.div`
 margin-top:20px;
-height: 350px;
 width: 300px;
 background: #FFF;
 overflow: hidden;
@@ -30,7 +28,8 @@ box-shadow: 0 0 10px 1px #d0d0d0;
 `
 
 const Image = styled.img`
-background-color:#999;
+background-color:#FFF;
+object-fit:contain;
 width:300px;
 min-height:180px;
 max-height:180px;

@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ApiResource()]
 #[ORM\Entity(repositoryClass: CoursesStudentsRepository::class)]
-#[UniqueEntity(fields: ["courses", "students"])]
+#[UniqueEntity(fields: ["courses", "students"], message: 'Vous suivez déjà cette formation')]
 class CoursesStudents
 {
     #[ORM\Id]

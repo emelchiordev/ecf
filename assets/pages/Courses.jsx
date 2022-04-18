@@ -9,7 +9,7 @@ const Courses = () => {
   const [activePage, setActivePage] = useState(0)
 
   return (
-    <div className='container d-flex flex-column align-items-center'>
+    <div className='container d-flex flex-column align-items-center h-100 mb-16'>
       <NavLink to='../mes-cours' className='mt-4 align-self-end pe-auto'><FontAwesomeIcon icon={faCircleArrowLeft} size="1x" /> RETOUR</NavLink>
 
       <Wrapper>

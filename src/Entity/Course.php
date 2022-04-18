@@ -12,6 +12,9 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['courses_object:read']],
@@ -19,9 +22,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
         "get" => [
             'method' => "get",
             'normalization_context' => ['groups' => ['courseStudent']]
+        ],
+        'put' => [
+            'method' => 'put'
+        ],
+        'delete' => [
+            'method' => 'delete'
         ]
     ]
 )]
+#[ApiFilter(OrderFilter::class, properties: ["dateCreated" => "DESC"])]
+#[ApiFilter(SearchFilter::class, properties: ['instructor'])]
+#[ApiFilter(SearchFilter::class, properties: ['published'])]
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 class Course
 {
@@ -31,6 +43,7 @@ class Course
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    #[Assert\NotBlank(message: "Vous devez saisir un titre pour votre cours")]
     #[Groups(['courses_object:read', 'students', 'courseStudent'])]
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
@@ -41,6 +54,8 @@ class Course
     #[ApiProperty(iri: 'http://schema.org/image')]
     public ?CoursesObject $photos = null;
 
+
+    #[Assert\NotBlank(message: "Vous devez saisir une description pour votre cours")]
     #[Groups(['courses_object:read', 'courseStudent', 'students'])]
     #[ORM\Column(type: 'text')]
     private $description;
@@ -51,7 +66,7 @@ class Course
     private $instructor;
 
     #[Groups(['courses_object:read', 'courseStudent'])]
-    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Section::class)]
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Section::class, cascade: ["remove"])]
     private $section;
 
 
@@ -64,8 +79,13 @@ class Course
     private $students;
 
 
-    #[ORM\OneToMany(mappedBy: 'courses', targetEntity: CoursesStudents::class)]
+    #[ORM\OneToMany(mappedBy: 'courses', targetEntity: CoursesStudents::class, cascade: ["remove"])]
     private $coursesStudents;
+
+    #[Groups(['courses_object:read', 'courseStudent'])]
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $published;
+
 
     public function __construct()
     {
@@ -223,6 +243,18 @@ class Course
                 $coursesStudent->setCourses(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(?bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }

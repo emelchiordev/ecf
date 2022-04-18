@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Authenticated from '../services/Authenticated';
 import ReCAPTCHA from "react-google-recaptcha";
 import GoogleApi from '../services/GoogleApi';
-
+import Logo from '../components/Logo';
 
 
 const Loginpage = ({ setAuthenticatedFromStore }) => {
@@ -63,10 +63,13 @@ const Loginpage = ({ setAuthenticatedFromStore }) => {
     }
 
     return (
-        <div className='container d-flex justify-content-center align-items-center'>
+        <div className='container d-flex flex-column justify-content-center align-items-center h-75'>
+            <Logo />
+            <h1>Connectez-vous à votre compte</h1>
+
             <Wrapper>
+
                 <div className='text-center'>
-                    <h1>Connectez-vous à votre compte</h1>
                     <form
                         onSubmit={handleSubmit}
                         className="d-flex flex-column   align-items-center"

@@ -9,6 +9,8 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ApiResource()]
 #[ORM\Entity(repositoryClass: LessonRepository::class)]
@@ -31,12 +33,13 @@ class Lesson
     #[ORM\ManyToOne(targetEntity: Section::class, inversedBy: 'lessons')]
     private $section;
 
+    #[Assert\NotBlank(message: "Vous devez saisir un titre pour votre leçon")]
     #[Groups(["read", 'courseStudent'])]
     #[ORM\Column(type: 'string', length: 255)]
     private $title;
 
     #[Groups(["read", 'courseStudent'])]
-    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: LessonStudents::class)]
+    #[ORM\OneToMany(mappedBy: 'lesson', targetEntity: LessonStudents::class, cascade: ["remove"])]
     private $lessonStudents;
 
     public function __construct()
@@ -85,6 +88,8 @@ class Lesson
         return $this;
     }
 
+
+
     public function getTitle(): ?string
     {
         return $this->title;
@@ -114,6 +119,7 @@ class Lesson
 
         return $this;
     }
+
 
     public function removeLessonStudent(LessonStudents $lessonStudent): self
     {

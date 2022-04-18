@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Entity;
 use App\Repository\UserRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -21,22 +22,22 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     "administrator" => Administrator::class,
 ])]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity("email", message: "Un compte existe déjà avec cette adresse email")]
+#[UniqueEntity("email", entityClass: User::class, message: "Un compte existe déjà avec cette adresse email")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[Groups('students')]
+    #[Groups(['students', 'instructor'])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[Groups('students')]
+    #[Groups(['students', 'instructor'])]
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir une adresse email")]
     #[Assert\Email(message: "Votre adresse email n'est pas valide")]
     private $email;
 
-    #[Groups('students')]
+    #[Groups(['students', 'instructor'])]
     #[ORM\Column(type: 'json')]
     private $roles = [];
 

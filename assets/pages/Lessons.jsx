@@ -21,6 +21,8 @@ const Lessons = () => {
   const [updatePage, setUpdatePage] = useState(false)
   const [sections, setSections] = useState([])
   const [lesson, setLesson] = useState([])
+  const [sending, setSending] = useState(false)
+
 
   const handleChange = (e) => {
     setLesson({ ...lesson, title: e.target.value })
@@ -55,10 +57,22 @@ const Lessons = () => {
 
 
   const handleSubmit = (id) => {
+    setErrorValidation({ title: "" })
+    setSending(true)
     LessonApi.createLesson({ ...lesson, section: '/api/sections/' + id, video: "", description: "", title: editSection[id] }).then(response => {
       if (response.status === 201) {
         setUpdatePage(!updatePage)
       }
+    }).catch(error => {
+      if (error.response.data['violations']) {
+        setSending(false)
+        const apiError = {}
+        error.response.data['violations'].map(error => {
+          apiError[error.propertyPath] = error.message
+        })
+        setErrorValidation(apiError)
+      }
+
     })
   }
 
@@ -77,7 +91,7 @@ const Lessons = () => {
   }
 
   return (
-    <div>
+    <div className='container-fluid h-75'>
       <div className="table-responsive mt-4">
         {sections.map(section => {
           return (
@@ -117,6 +131,8 @@ const Lessons = () => {
                       <input type="text" defaultValue={editSection[section.id]} className="form-control" name={section.id} onChange={handleChangeEdit} placeholder="Titre de la leçon" aria-label="lesson" aria-describedby="lesson" />
 
                       <Button simple={true} text="AJOUTER" onclick={() => handleSubmit(section.id)}></Button>
+                      {errorValidation.title && <p className='invalid-feedback d-block'>{errorValidation.title}</p>}
+
                     </div>
                   </div>
                 </div>

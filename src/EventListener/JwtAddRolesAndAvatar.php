@@ -49,6 +49,7 @@ class JwtAddRolesAndAvatar
             } else {
                 $payload['avatar'] = "/avatar/nullavatar.png";
             }
+            $payload['accountValidate'] = $instructor->getAccountValidate();
             $payload['id'] = $instructor->getId();
         }
 
