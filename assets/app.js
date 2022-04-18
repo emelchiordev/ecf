@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './container/NavBar';
-import Homepage from './pages/homepage';
+import Homepage from './pages/Homepage';
 import Loginpage from './container/LoginPage';
 import { Provider } from "react-redux"
 import store from './store';
