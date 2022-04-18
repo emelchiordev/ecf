@@ -17,7 +17,7 @@ class InstallController extends AbstractController
         // Création d'un compte administrateur
         $password = "ve45vetlor";
         $user = new Administrator();
-        $user->setEmail("manu.melchior@gmail.com");
+        $user->setEmail("admin@ecoit.com");
         $user->setRoles(["administrator"]);
         $user->setPassword($passwordHasher->hashPassword($user, $password));
         $this->entityManager = $entity;
