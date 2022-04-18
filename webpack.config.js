@@ -75,7 +75,6 @@ Encore
     ;
 Encore.configureDefinePlugin(options => {
     options['process.env'].API_URL = JSON.stringify(process.env.API_URL);
-    options['process.env'].ROOT_URL = JSON.stringify(process.env.ROOT_URL);
 })
 
 module.exports = Encore.getWebpackConfig();
