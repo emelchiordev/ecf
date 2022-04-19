@@ -195,8 +195,9 @@ const NavBar = ({ isAuthenticatedStatus, studentStore, setStudentToStore, course
                                         <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                         </a>
                                         <Avatar src={ROOT_URL + "/avatar/" + isAuthenticatedStatus.avatar} size="50" round={true} color="#364958" />
+                                        <ButtonNav data-bs-dismiss='offcanvas' className='mt-4' onClick={() => { handleProfil }}>MON PROFIL</ButtonNav>
 
-                                        <ButtonNav data-bs-dismiss='offcanvas' className='mt-4' onClick={() => { navigate('/mes-cours') }}><FontAwesomeIcon icon={faGears} /> GERER MES FORMATIONS</ButtonNav>
+                                        <ButtonNav data-bs-dismiss='offcanvas' className='mt-4' onClick={() => { navigate('/mes-cours') }}> GERER MES FORMATIONS</ButtonNav>
                                     </>
                                 }
 
