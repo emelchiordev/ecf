@@ -20,6 +20,11 @@ const HomePageWrapper = ({ isAuthenticatedStatus }) => {
 
         return () => setCourses([])
     }, [])
+
+    const handleFollow = () => {
+        navigate('/catalogue')
+    }
+
     return (
         <div className="text-center col-12 col-lg-6 ">
             <div className="mt-10">

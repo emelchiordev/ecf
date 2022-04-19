@@ -44,10 +44,10 @@ class JwtAddRolesAndAvatar
         if (in_array("ROLES_INSTRUCTORS", $user->getRoles())) {
             $actualUser = $this->userRepository->findOneBy(['email' => $user->getUserIdentifier()]);
             $instructor = $this->instructorRepository->find($actualUser->getId());
-            if ($instructor->avatar->getFilePath() !== null) {
+            if (isset($instructor->avatar)) {
                 $payload['avatar'] = $instructor->avatar->getFilePath();
             } else {
-                $payload['avatar'] = "/avatar/nullavatar.png";
+                $payload['avatar'] = "nullavatar.png";
             }
             $payload['accountValidate'] = $instructor->getAccountValidate();
             $payload['id'] = $instructor->getId();

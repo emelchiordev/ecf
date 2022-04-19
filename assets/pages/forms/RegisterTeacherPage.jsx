@@ -15,7 +15,7 @@ const RegisterTeacherPage = () => {
     const [instructor, setInstructor] = useState({
         accountValidate: true,
         roles: ["ROLES_INSTRUCTORS"],
-        avatar: "/api/media_objects/6",
+        avatar: null,
         firstName: "",
         lastName: "",
         password: "",
@@ -38,6 +38,7 @@ const RegisterTeacherPage = () => {
 
     const handleSubmit = () => {
         setSending(true)
+        setErrorValidation('')
         InstructorApi.createInstructor(instructor).then(response => {
             if (response.status === 200 || response.status === 201) {
                 setSending(false)

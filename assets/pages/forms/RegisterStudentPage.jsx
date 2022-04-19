@@ -62,7 +62,7 @@ const RegisterStudentPage = () => {
 
 
     return (
-        <div className='container d-flex flex-column align-items-center h-75 w-50'>
+        <div className='container d-flex flex-column align-items-center h-75'>
             <h1 className='mt-10'>Vous souhaitez suivre une formation ?</h1>
             <Wrapper>
 

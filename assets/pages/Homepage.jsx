@@ -22,11 +22,7 @@ const Homepage = () => {
 
             <div className="container-fluid" style={{ "backgroundColor": "#FFF" }}>
                 <div className="d-flex flex-row">
-
                     <HomePageWrapper />
-
-
-
                     <div className="curves position-relative ">
                         <Wrapper2>
 
