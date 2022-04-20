@@ -1,7 +1,5 @@
 # PROJET : ECOIT
 
-# DESCRIPTION : 
-
 C’est un fait, la crise écologique est devenue une urgence majeure. La sixième extinction 
 massive a déjà commencé et le changement climatique se fait de plus en plus ressentir au fil 
 des années. Mais qu’en est-il d’internet ?
