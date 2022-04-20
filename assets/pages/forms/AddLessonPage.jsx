@@ -102,7 +102,7 @@ const AddLessonPage = () => {
 
         <div className="container d-flex flex-column ">
             <NavLink to='../mes-cours' className='mt-4 align-self-end pe-auto'><FontAwesomeIcon icon={faCircleArrowLeft} size="1x" /> RETOUR</NavLink>
-
+            {console.log(lesson)}
             <div className="card" style={{ "marginTop": "1rem" }}>
                 <div className="card-header">
 

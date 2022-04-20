@@ -91,7 +91,11 @@ const Lessons = () => {
   }
 
   return (
+
+
+
     <div className='container-fluid h-75'>
+
       <div className="table-responsive mt-4">
         {sections.map(section => {
           return (

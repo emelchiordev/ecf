@@ -33,7 +33,7 @@ const Loginpage = ({ setAuthenticatedFromStore }) => {
     const handleCaptcha = (value) => {
 
         GoogleApi.createCourseStudent(new URLSearchParams({
-            'secret': "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+            'secret': "6LcmGXkfAAAAAHS-neYJmzfiNdeHf0Jn0NhkjLoX",
             'response': value
 
         })).then(res => console.log(res)).catch(e => console.log(e.response))
@@ -104,7 +104,7 @@ const Loginpage = ({ setAuthenticatedFromStore }) => {
                             )}
                         </div>
                         <ReCAPTCHA className='mt-5'
-                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                            sitekey="6LcmGXkfAAAAAGVCtSefHFeSdsA98UoG12BrhZdB"
                             onChange={handleCaptcha}
 
                         />

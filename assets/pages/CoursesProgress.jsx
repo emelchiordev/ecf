@@ -289,7 +289,7 @@ const CoursesProgress = ({ isAuthenticatedStatus, studentStore, setStudentToStor
                             <div>
                                 <Curves className='d-flex flex-column align-items-center justify-content-center position-relative'>
                                     <div className='mt-2'>{courses.title}</div>
-                                    <div className='display-5'>{percentage} %</div>
+                                    <div className='display-5'>{percentage.toFixed(2)} %</div>
 
                                 </Curves>
 
