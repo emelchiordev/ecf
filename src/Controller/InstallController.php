@@ -15,15 +15,14 @@ class InstallController extends AbstractController
     public function index(EntityManagerInterface $entity, UserPasswordHasherInterface $passwordHasher): Response
     {
         // Création d'un compte administrateur
-        $password = "ve45vetlor";
+        $password = $this->getParameter('pass_admin');
         $user = new Administrator();
-        $user->setEmail("admin@ecoit.com");
+        $user->setEmail($this->getParameter('user_admin'));
         $user->setRoles(["administrator"]);
         $user->setPassword($passwordHasher->hashPassword($user, $password));
         $this->entityManager = $entity;
         $this->entityManager->persist($user);
         $this->entityManager->flush();
-
 
         return $this->render('install/index.html.twig', [
             'controller_name' => 'InstallController',
