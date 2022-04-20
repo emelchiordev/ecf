@@ -14,6 +14,8 @@ d’être une plateforme d’éducation permettant à tout instructeur expert en
 impact digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon 
 leur empreinte numérique.
 
+# MANUEL D'UTILISATION : 
+[MANUEL UTILISATION ECOIT.pdf](https://github.com/emelchiordev/ecf/files/8525407/MANUEL.UTILISATION.ECOIT.pdf)
 
 # VARIABLE D'ENVIRONNEMENT OBLIGATOIRE : 
 USER_ADMIN=''    adresse email de l'administrateur
@@ -31,6 +33,7 @@ DATABASE_URL=""                    URI de la base de données
 6) php bin/console doctrine:database:create
 7) php bin/console doctrine:migrations:migrate
 8) Route pour installer le compte administrateur : /install
+
 
 
 
