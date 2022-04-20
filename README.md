@@ -15,6 +15,9 @@ leur empreinte numérique.
 # MANUEL D'UTILISATION : 
 [MANUEL UTILISATION ECOIT.pdf](https://github.com/emelchiordev/ecf/files/8525407/MANUEL.UTILISATION.ECOIT.pdf)
 
+# FICHIER DE MIGRATION DOCTRINE: 
+[migration.txt](https://github.com/emelchiordev/ecf/files/8525451/migration.txt)
+
 # VARIABLE D'ENVIRONNEMENT OBLIGATOIRE : 
 USER_ADMIN=" " adresse email de l'administrateur
 
