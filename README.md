@@ -16,11 +16,15 @@ leur empreinte numérique.
 [MANUEL UTILISATION ECOIT.pdf](https://github.com/emelchiordev/ecf/files/8525407/MANUEL.UTILISATION.ECOIT.pdf)
 
 # VARIABLE D'ENVIRONNEMENT OBLIGATOIRE : 
-USER_ADMIN=''    adresse email de l'administrateur
-PASS_ADMIN=''    mot de passe de l'administrateur
-API_URL="http://localhost/api/"    adresse de l'API
-ROOT_URL="http://localhost"        adresse du site
-DATABASE_URL=""                    URI de la base de données
+USER_ADMIN=" " adresse email de l'administrateur
+
+PASS_ADMIN=" " mot de passe de l'administrateur
+
+API_URL="http://localhost/api/" adresse de l'API
+
+ROOT_URL="http://localhost" adresse du site
+
+DATABASE_URL="" URI de la base de données
 
 # INSTALLATION : 
 1) git clone https://github.com/emelchiordev/ecf.git
