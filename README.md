@@ -12,6 +12,27 @@ d’être une plateforme d’éducation permettant à tout instructeur expert en
 impact digital. Et pourquoi pas délivrer enfin un label officiel pour classer les sites web selon 
 leur empreinte numérique.
 
+# ADRESSE DU PROJET : 
+le lien du projet se trouve sur la copie de mon évaluation.
+
+pour tester le projet
+
+compte administrateur :
+utilisateur : admin@ecoit.com
+mot de passe : ve45vetlor
+
+compte étudiant :
+utilisateur : johnn53@ecoit.com
+mot de passe : ve45vetlor
+
+compte professeur
+utilisateur : leprof@ecoit.com
+mot de passe : ve45vetlor
+
+
+# DOCUMENTATION TECHNIQUE
+[DOCUMENTATION TECHNIQUE.pdf](https://github.com/emelchiordev/ecf/files/8534114/DOCUMENTATION.TECHNIQUE.pdf)
+
 # MANUEL D'UTILISATION : 
 [MANUEL UTILISATION ECOIT.pdf](https://github.com/emelchiordev/ecf/files/8525407/MANUEL.UTILISATION.ECOIT.pdf)
 
