@@ -39,6 +39,12 @@ mot de passe : ve45vetlor
 # FICHIER DE MIGRATION DOCTRINE: 
 [migration.txt](https://github.com/emelchiordev/ecf/files/8525451/migration.txt)
 
+# FICHIER CHARTE GRAPHIQUE : 
+[FICHIER CHARTE GRAPHIQUE.pdf](https://github.com/emelchiordev/ecf/files/8534446/FICHIER.CHARTE.GRAPHIQUE.pdf)
+
+# LIEN TRELLO POUR LE SUIVI DU PROJET :
+https://trello.com/b/vHY07Z4p/ecoit
+
 # VARIABLE D'ENVIRONNEMENT OBLIGATOIRE : 
 USER_ADMIN=" " adresse email de l'administrateur
 
