@@ -13,7 +13,7 @@ impact digital. Et pourquoi pas délivrer enfin un label officiel pour classer l
 leur empreinte numérique.
 
 # ADRESSE DU PROJET : 
-##le lien du projet se trouve sur la copie de mon évaluation.
+- le lien du projet se trouve sur la copie de mon évaluation.
 
 pour tester le projet
 
