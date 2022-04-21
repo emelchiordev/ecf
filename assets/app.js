@@ -43,48 +43,50 @@ const App = () => {
     return <>
         <Provider store={store}>
             <Router>
-                <div style={{ "backgroundColor": "#fafafa", "height": '100vh', "position": "relative" }}>
+                <div style={{ "backgroundColor": "#fafafa", "position": "relative" }}>
 
                     <NavBar />
-                    <Routes>
-                        <Route path="inscription-etudiant" element={<RegisterStudentPage />}></Route>
-                        <Route path="inscription-formateur" element={<RegisterTeacherPage />}></Route>
-                        <Route path="/administration" element={<GuardedRoute ><Adminpage /></GuardedRoute>} >
-                            <Route path="formateurs" element={<GuardedRoute ><TeachersList /></GuardedRoute>} >
+                    <div style={{ "height": "100vh", 'backgroundColor': '#fafafa' }}>
+                        <Routes>
+                            <Route path="inscription-etudiant" element={<RegisterStudentPage />}></Route>
+                            <Route path="inscription-formateur" element={<RegisterTeacherPage />}></Route>
+                            <Route path="/administration" element={<GuardedRoute ><Adminpage /></GuardedRoute>} >
+                                <Route path="formateurs" element={<GuardedRoute ><TeachersList /></GuardedRoute>} >
+                                </Route>
+
+                                <Route path="ajouter-formateur" element={<GuardedRoute ><AddTeacherPage /></GuardedRoute>} ></Route>
+
+                            </Route>
+                            <Route path="/catalogue" element={<CoursesCatalog />} ></Route>
+                            <Route path="/ajouter-cours" element={<GuardedRoute ><AddCoursePage /></GuardedRoute>} ></Route>
+                            <Route path="/editer-lecons/:id" element={<GuardedRoute ><AddLessonPage /></GuardedRoute>} >
+                            </Route>
+                            <Route path="/cours/:id" element={<GuardedRoute ><Courses /></GuardedRoute>} >
+
+                                <Route path="lecons" element={<GuardedRoute ><Lessons /></GuardedRoute>} >
+                                </Route>
+                                <Route path="sections" element={<GuardedRoute ><Sections /></GuardedRoute>} >
+                                </Route>
+                                <Route path="editer" element={<GuardedRoute ><CoursesEdit /></GuardedRoute>} >
+                                </Route>
+
                             </Route>
 
-                            <Route path="ajouter-formateur" element={<GuardedRoute ><AddTeacherPage /></GuardedRoute>} ></Route>
-
-                        </Route>
-                        <Route path="/catalogue" element={<CoursesCatalog />} ></Route>
-                        <Route path="/ajouter-cours" element={<GuardedRoute ><AddCoursePage /></GuardedRoute>} ></Route>
-                        <Route path="/editer-lecons/:id" element={<GuardedRoute ><AddLessonPage /></GuardedRoute>} >
-                        </Route>
-                        <Route path="/cours/:id" element={<GuardedRoute ><Courses /></GuardedRoute>} >
-
-                            <Route path="lecons" element={<GuardedRoute ><Lessons /></GuardedRoute>} >
-                            </Route>
-                            <Route path="sections" element={<GuardedRoute ><Sections /></GuardedRoute>} >
-                            </Route>
-                            <Route path="editer" element={<GuardedRoute ><CoursesEdit /></GuardedRoute>} >
+                            <Route path="/mes-cours" element={<GuardedRoute ><CoursesList /></GuardedRoute>} >
                             </Route>
 
-                        </Route>
+                            <Route path="/mon-profil" element={<GuardedRoute ><ProfilSetting /></GuardedRoute>} ></Route>
+                            <Route path="/suivi-cours/:id/:id" element={<GuardedRoute ><CoursesProgress /></GuardedRoute>}>
+                            </Route>
+                            <Route path="/connexion" element={<Loginpage />} >
+                            </Route>
+                            <Route path="/politique-confidentialite" element={<Politique />}></Route>
 
-                        <Route path="/mes-cours" element={<GuardedRoute ><CoursesList /></GuardedRoute>} >
-                        </Route>
-
-                        <Route path="/mon-profil" element={<GuardedRoute ><ProfilSetting /></GuardedRoute>} ></Route>
-                        <Route path="/suivi-cours/:id/:id" element={<GuardedRoute ><CoursesProgress /></GuardedRoute>}>
-                        </Route>
-                        <Route path="/connexion" element={<Loginpage />} >
-                        </Route>
-                        <Route path="/politique-confidentialite" element={<Politique />}></Route>
-
-                        <Route path="/test" element={<Homepage />}></Route>
-                        <Route path="/" element={<Homepage />}>
-                        </Route>
-                    </Routes>
+                            <Route path="/test" element={<Homepage />}></Route>
+                            <Route path="/" element={<Homepage />}>
+                            </Route>
+                        </Routes>
+                    </div>
                     <Footer />
                 </div>
             </Router>

@@ -8,7 +8,10 @@ use App\Repository\CoursesStudentsRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ApiResource()]
+#[ApiResource(
+    attributes: ["security" => "is_granted('IS_AUTHENTICATED_FULLY')"]
+
+)]
 #[ORM\Entity(repositoryClass: CoursesStudentsRepository::class)]
 #[UniqueEntity(fields: ["courses", "students"], message: 'Vous suivez déjà cette formation')]
 class CoursesStudents

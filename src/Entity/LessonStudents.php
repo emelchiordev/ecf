@@ -10,7 +10,7 @@ use App\Repository\LessonStudentsRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-#[ApiResource()]
+#[ApiResource(attributes: ["security" => "is_granted('IS_AUTHENTICATED_FULLY')"],)]
 #[UniqueEntity(fields: ["lesson", "student"])]
 #[ORM\Entity(repositoryClass: LessonStudentsRepository::class)]
 class LessonStudents

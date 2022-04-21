@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ApiResource(
+    attributes: ["security" => "is_granted('IS_AUTHENTICATED_FULLY')"],
     collectionOperations: [
         "get" => [
             'method' => "get",
